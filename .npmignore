@@ -1,0 +1,10 @@
+# .npmignore
+.DS_Store
+.tscache/
+resources/
+src/
+.eslintrc.json
+*.code-workspace
+gruntfile.*
+typedoc.*
+webpack.*

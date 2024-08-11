@@ -25,20 +25,26 @@
 
 module.exports = (grunt) => {
 
-	const jsDir  = "dist/";
+	const srcDir  = "src/";
+	const distDir = "dist/";
 
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON("package.json"),
 		
-        clean: [jsDir],
+        clean: [distDir],
 
         copy: {
 			main: {
 				files: [
-					{ expand: true, cwd: "./resources",  src: ["**/*.css"],        dest: jsDir + "/css/"},
-					{ expand: true,                      src: ["./README.md"],     dest: jsDir },
-					{ expand: true,                      src: ["./LICENSE.md"],    dest: jsDir },
+					{ expand: true,
+                      cwd: srcDir + "./resources",
+                      src: ["**/*"],
+                      dest: distDir + "/resources/"},
+					{ expand: true,
+                      cwd: srcDir,
+                      src: ["**/*.html","**/*.css"],
+                      dest: distDir},
 				],
 			},
 		},
