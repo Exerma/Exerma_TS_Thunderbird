@@ -1,0 +1,79 @@
+{
+    "env": {
+        "browser": true,
+        "es2022": true,
+        "es2023": true,
+        "jest": true,
+        "node": true
+    },
+    "extends": [
+        "standard-with-typescript",
+		"plugin:jsdoc/recommended"
+    ],
+    "ignorePatterns": ["/node_modules/","*.js","*.cjs"],
+    "overrides": [
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
+    ],
+    "parser": "@typescript-eslint/parser",
+	"parserOptions": {
+        "project": [
+            "tsconfig.json"
+        ],
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "jsdoc"],
+
+
+
+	"rules": {
+        "operator-linebreak": ["warn", "before"],
+        "space-in-parens": "off",
+        "no-multiple-empty-lines": ["warn", {
+            "max": 5,
+            "maxBOF": 0,
+            "maxEOF": 2
+        }],
+        "indent": "off",
+        "valid-typeof": ["error", { "requireStringLiterals": false }],
+        "@typescript-eslint/indent": "off",
+        "padded-blocks": ["off", "always", { "allowSingleLineBlocks": true }],
+        "no-multi-spaces": "off",
+        "no-unused-vars": "off", 
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-misused-promises": ["error", {
+            "checksConditionals": true,
+            "checksSpreads": true,
+            "checksVoidReturn": {
+                    "arguments": false,
+                    "attributes": true,
+                    "properties": true,
+                    "returns": true,
+                    "variables": true
+                }
+        }],
+        "no-trailing-spaces": ["error", { 
+            "skipBlankLines": true,
+            "ignoreComments": true
+        }],
+        "@typescript-eslint/no-extraneous-class": ["error", {
+            "allowEmpty": true,
+            "allowConstructorOnly": false
+        }],
+        "new-cap": ["error", {
+            "newIsCapExceptions": ["jsPDF"]
+        }]
+
+        
+    }
+}

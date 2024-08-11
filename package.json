@@ -1,0 +1,57 @@
+{
+    "name": "exerma_ts_thunderbird",
+    "version": "0.2.0",
+    "description": "TypeScript framework for Thunderbird-addin projects of Exerma",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "----- Compilation -----": "",
+        "build": "grunt clean; npx tsc --build; grunt copy",
+        "clean": "grunt clean",
+        "compile": "npx tsc --build --verbose;",
+        "----- Publish -----": "",
+        "publish": "npm publish --access public",
+        "----- Lint & Doc -----": "",
+        "lint": "eslint src/ --ignore-pattern /node_module/ --ext .ts --ext .cjs --ext .js ",
+        "docs": "typedoc",
+        "webpack": "webpack",
+        "----- Exerma -----": "",
+        "exerma:local": "npm install ~/Data/Sources/TypeScript/Exerma_TS_Base/Exerma_TS_Base/",
+        "exerma:npm": "npm install @exerma/exerma_ts_base"
+    },
+    "author": {
+        "name": "Patrick Seuret",
+        "email": "patrick@seuret.ch",
+        "url": "https://github.com/exerma"
+    },
+    "license": "MIT",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Exerma/Exerma_TS_Thunderbird.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Exerma/Exerma_TS_Thunderbird/issues"
+    },
+    "homepage": "https://github.com/Exerma/Exerma_TS_Thunderbird#readme",
+    "devDependencies": {
+        "@types/node": "^22.2.0",
+        "@typescript-eslint/eslint-plugin": "^6.5.0",
+        "@typescript-eslint/parser": "^6.5.0",
+        "@typescript-eslint/typescript-estree": "^8.0.1",
+        "eslint": "^8.48.0",
+        "eslint-config-standard-with-typescript": "^39.0.0",
+        "eslint-plugin-import": "^2.28.1",
+        "eslint-plugin-jsdoc": "^46.5.1",
+        "eslint-plugin-n": "^16.0.2",
+        "eslint-plugin-promise": "^6.1.1",
+        "grunt": "^1.6.1",
+        "grunt-contrib-clean": "^2.0.1",
+        "grunt-contrib-copy": "^1.0.0",
+        "typescript": "^5.5.4"
+    },
+    "dependencies": {
+        "@exerma/exerma_ts_base": "file:../../Exerma_TS_Base/Exerma_TS_Base",
+        "jspdf": "^2.5.1"
+    }
+}
