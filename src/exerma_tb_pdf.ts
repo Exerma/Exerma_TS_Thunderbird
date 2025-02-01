@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
- *  (c) Patrick Seuret, 2023-2024
+ *  (c) Patrick Seuret, 2023  
  * ---------------------------------------------------------------------------
  *  exerma_tb_pdf.js
  * ---------------------------------------------------------------------------
@@ -8,6 +8,7 @@
  * Documentation about jsPDF: https://parall.ax/products/jspdf
  * 
  * Versions:
+ *   2024-09-29: Fix: Date shown in message header was today's date instead of the message date
  *   2024-07-20: Add: In createPdf(): Activate useCORS in pdfFile.html() function which fixed load of pictures
  *   2024-01-04: Add: Use plain text version of message in createPdf() if html version is missing
  *   2023-11-18: First version (move createPDF() from project_main.ts)
@@ -15,29 +16,22 @@
  */
 
     // --------------- Imports
-    import type * as ex                         from '../node_modules/@exerma/exerma_ts_base/dist/exerma_types'
-    import jsPDF                                from 'jspdf'
+    import { jsPDF }                             from 'jspdf'
     import {
              tbExploreMessagePartStructure,
              tbGetMessagePartBody
-            }                                   from './exerma_tb_messages'
-    import { loadResourceHtml, loadResource }   from './exerma_tb_misc'
-    import { exLangFuture }                     from './exerma_tb_lang'
-    import {
-                log,
-                cInfoStarted,
-                cRaiseUnexpected
-            }                                   from '../node_modules/@exerma/exerma_ts_base/dist/exerma_log'
-    import {
-                datetimeToFieldReplacement,
-                numberToByteSize
-            }                                   from '../node_modules/@exerma/exerma_ts_base/dist/exerma_misc'
+            }                                    from './exerma_tb_messages'
+    import { datetimeToFieldReplacement, numberToByteSize }        from '../exerma_base/exerma_misc'
+    import { loadResourceHtml, loadResource }    from './exerma_tb_misc'
     import {
              createAndAddElement,
              setElementByIdAttribute,
              setElementByIdInnerContent
-            }                                   from '../node_modules/@exerma/exerma_ts_base/dist/exerma_dom'
-
+            }                                    from '../exerma_base/exerma_dom'
+    import log,
+           { cRaiseUnexpected, cInfoStarted }    from '../exerma_base/exerma_log'
+    import type { uString }                      from '../exerma_base/exerma_types'
+    import lang, { exLangFuture }                from '../exerma_base/exerma_lang'
 
     // ----- PDF template
     const cResourcePdfTemplate: string   = './pdf_template.html'
@@ -176,12 +170,18 @@
             } else
             if (typeof header.date === 'number') {
                 mailDate = new Date(header.date)
+            } else
+            if (header.date instanceof Date) {
+                mailDate = (header.date)
+            } else {
+                log().raiseBenine(cSourceName, 'Date format is: ' + (typeof header.date))
             }
+            const dateParts = datetimeToFieldReplacement(mailDate)
             void feedHeaderField(myDoc,
                                  htmlTargets?.senderLabelId ?? cHtmlPdfTemplateDateLabelId,
                                  exLangFuture('Date:'),
                                  htmlTargets?.senderContentId ?? cHtmlPdfTemplateDateContentId,
-                                 datetimeToFieldReplacement(mailDate).get('full'))
+                                 dateParts.get('fulldate') + ' ' + dateParts.get('mediumtime'))
     
             // 4) Set To
             void feedHeaderField(myDoc,
@@ -261,7 +261,8 @@
                 const list = myDoc.createElement('ul')
                 list.setAttribute('class', htmlTargets?.attachmentUlClass ?? cHtmlPdfTemplateAttachmentUlClass)
                 attachments.forEach(aFile => {
-                    const item = myDoc.createElement('li')
+                    const doc = (myDoc as Document)
+                    const item = doc.createElement('li')
                     item.setAttribute('class', htmlTargets?.attachmentLiClass ?? cHtmlPdfTemplateAttachmentLiClass)
                     item.innerText = aFile.name + ' (' + numberToByteSize(aFile.size, 1) + ')'
                     list.appendChild(item)
@@ -321,7 +322,7 @@
             }
     
             // Make html file self-consistant by embodding the CSS in the html file
-            const cssFile: ex.uString = await loadResource(resourceName.replace('html', 'css'), 'text') as ex.uString
+            const cssFile: uString = await loadResource(resourceName.replace('html', 'css'), 'text') as uString
             void createAndAddElement(myDoc,
                                      'style', {
                                      innerHtml: cssFile,
