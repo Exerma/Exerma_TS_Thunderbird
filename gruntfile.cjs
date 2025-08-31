@@ -37,14 +37,9 @@ module.exports = (grunt) => {
         copy: {
 			main: {
 				files: [
-					{ expand: true,
-                      cwd: srcDir + "./resources",
-                      src: ["**/*"],
-                      dest: distDir + "/resources/"},
-					{ expand: true,
-                      cwd: srcDir,
-                      src: ["**/*.html","**/*.css"],
-                      dest: distDir},
+					{ expand: true, cwd: "./resources/", src: ["**/*"],                  dest: distDir + "/resources/"},
+					{ expand: true, cwd: "./apis/",      src: ["**/*.j*"],               dest: distDir + "/api/"},
+                    { expand: true, cwd: srcDir,         src: ["**/*.html","**/*.css"],  dest: distDir},
 				],
 			},
 		},
