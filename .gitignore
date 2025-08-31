@@ -2,7 +2,6 @@
 # Compiled and cache files
 .trash/
 .tscache/
-lib/
 
 # JS files are compiled TS 
 src/*.js

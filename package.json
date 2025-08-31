@@ -1,9 +1,14 @@
 {
-    "name": "exerma_ts_thunderbird",
+    "name": "@exerma/exerma_ts_thunderbird",
     "version": "0.2.0",
     "description": "TypeScript framework for Thunderbird-addin projects of Exerma",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist", 
+        "README.md",
+        "LICENSE"
+    ],
     "scripts": {
         "----- Compilation -----": "",
         "build": "grunt clean; npx tsc --build; grunt copy",
@@ -26,7 +31,6 @@
         "url": "https://github.com/exerma"
     },
     "license": "MIT",
-    "type": "module",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Exerma/Exerma_TS_Thunderbird.git"
