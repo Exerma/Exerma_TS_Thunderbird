@@ -21,17 +21,20 @@
              tbExploreMessagePartStructure,
              tbGetMessagePartBody
             }                                    from './exerma_tb_messages'
-    import { datetimeToFieldReplacement, numberToByteSize }        from '../exerma_base/exerma_misc'
+    import {
+             datetimeToFieldReplacement,
+             numberToByteSize
+            }                                    from '../node_modules/@exerma/exerma_ts_base/dist/exerma_misc'
     import { loadResourceHtml, loadResource }    from './exerma_tb_misc'
     import {
              createAndAddElement,
              setElementByIdAttribute,
              setElementByIdInnerContent
-            }                                    from '../exerma_base/exerma_dom'
+            }                                    from '../node_modules/@exerma/exerma_ts_base/dist/exerma_dom'
     import log,
-           { cRaiseUnexpected, cInfoStarted }    from '../exerma_base/exerma_log'
-    import type { uString }                      from '../exerma_base/exerma_types'
-    import lang, { exLangFuture }                from '../exerma_base/exerma_lang'
+           { cRaiseUnexpected, cInfoStarted }    from '../node_modules/@exerma/exerma_ts_base/dist/exerma_log'
+    import type { uString }                      from '../node_modules/@exerma/exerma_ts_base/dist/exerma_types'
+    import lang, { exLangFuture }                from '../node_modules/@exerma/exerma_ts_base/dist/exerma_lang'
 
     // ----- PDF template
     const cResourcePdfTemplate: string   = './pdf_template.html'
