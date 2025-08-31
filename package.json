@@ -1,6 +1,6 @@
 {
     "name": "@exerma/exerma_ts_thunderbird",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "TypeScript framework for Thunderbird-addin projects of Exerma",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
