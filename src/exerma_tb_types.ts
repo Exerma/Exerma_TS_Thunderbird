@@ -14,6 +14,7 @@
 
     // --------------- Imports
     // import '../dependancies/generate-mail-extension-typings/index'
+    import type * as fsa                         from '../dependancies/fsa/fsa.mjs'
 
     // Thunderbird prototypes
     export const messenger = browser
@@ -31,3 +32,5 @@
 
     export type  Tab           = messenger.tabs.Tab
     export type nTab           = messenger.tabs.Tab | null
+
+    export type tbFsFolderId   = fsa.tbFolderIdType | null

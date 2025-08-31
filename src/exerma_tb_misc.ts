@@ -25,6 +25,7 @@
                 setFileExt,
                 buildFullname
             }                               from '../node_modules/@exerma/exerma_ts_base/dist/exerma_files'
+    import type { tbFsFolderId }            from './exerma_tb_types'
 
     // --------------- Local type
     /**
@@ -130,7 +131,7 @@
      * Save the provided blob on disk using the experiment API saveFile().
      * @param {ArrayBuffer} dataBuffer is an array with the data to save
      * @param {string} filename is the name of the file to save
-     * @param {fsa.tbFolderIdType} folderId is the ID of the folder where to save the file (returned 
+     * @param {tbFsFolderId} folderId is the ID of the folder where to save the file (returned 
      *                       by a FSA directory picker).
      *                       If not provided or is an empty string, then ask the user where to save it.
      *                       If provided, then use it without asking
@@ -145,10 +146,10 @@
      */
     export async function saveBlob (dataBuffer: ArrayBuffer,
                                     filename: string,
-                                    folderId: fsa.tbFolderIdType,
+                                    folderId: tbFsFolderId,
                                     options?: {
                                         setExt: string
-                                    }): Promise<[fsa.tbFolderIdType, boolean]> {
+                                    }): Promise<[tbFsFolderId, boolean]> {
 
         const cSourceName: string = 'exerma_tb/exerma_tb_misc.ts/saveBlob'
 
